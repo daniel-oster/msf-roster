@@ -4,6 +4,10 @@
   </h1>
 </div>
 <h2>paste here</h2>
-<textarea #txt></textarea>
-<button #b (click)="parse(txt.value)">parse</button>
+<textarea #txt rows="7" style="width: 100%"></textarea>
+<button #a (click)="parse(txt.value)">Add</button>
+<button #c (click)="clear()">Clear</button>
+<button #d (click)="downloadFile()">Download file</button>
+
+{{last}}
 

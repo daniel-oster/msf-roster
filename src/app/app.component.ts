@@ -9,6 +9,9 @@ import {saveAs} from 'file-saver';
 export class AppComponent {
   title = 'app';
   map = [];
+  data = [];
+  last = '';
+
   constructor() {
     this.map['A.I.M. Assaulter'] = 'AimDmg_Speed';
     this.map['A.I.M. Infector'] = 'AimControl_Infect';
@@ -144,12 +147,24 @@ export class AppComponent {
     this.map['Yo-Yo'] = 'YoYo';
     this.map['Yondu'] = 'Yondu';
 
+    this.data = ['id,name,power,level,gearTier,stars,redStars'];
 
   }
+
+  clear() {
+    this.data = ['id,name,power,level,gearTier,stars,redStars'];
+  }
+
+  downloadFile() {
+    var blob = new Blob([this.data.join('\n')], {type: "text/csv;charset=utf-8"});
+    saveAs(blob, "roster.csv");
+    this.clear();
+  }
+
+
   parse(val:string) {
 
     var rows = val.split('\n');
-    var data = ['id,name,power,level,gearTier,stars,redStars'];
     this.map;
     rows.forEach(v => {
       let from = v.indexOf('\'s ');
@@ -170,11 +185,9 @@ export class AppComponent {
         gearTier = gearTier.substring(0, indexOfDot);
       }
 
-      data.push(id + ',' + name + ',' +power+ ',' +level+ ',' +gearTier+ ',' +ys+ ',' + rs);
+      this.data.push(id + ',' + name + ',' +power+ ',' +level+ ',' +gearTier+ ',' +ys+ ',' + rs);
+      this.last = name;
 
     });
-    var blob = new Blob([data.join('\n')], {type: "text/csv;charset=utf-8"});
-    saveAs(blob, "roster.csv");
-
   }
 }
