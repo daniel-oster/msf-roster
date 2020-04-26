@@ -172,8 +172,12 @@ export class AppComponent {
       if (v.trim().startsWith('<') || v.trim().startsWith('@') || v.trim().length == 0) {
         return;
       }
-
-      var piece = v;
+      var piece;
+      if (v.includes('\'s ')) {
+        piece = v.substring(v.indexOf(' ')).trim();
+      } else {
+        piece = v;
+      }
       let endOfName = piece.indexOf(':');
       var name = piece.substring(0, endOfName);
       var id = this.map[name];
