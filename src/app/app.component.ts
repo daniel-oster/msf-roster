@@ -169,7 +169,7 @@ export class AppComponent {
     var rows = text.value.split('\n');
     this.map;
     rows.forEach(v => {
-      if (v.startsWith('<')) {
+      if (v.trim().startsWith('<') || v.trim().startsWith('@') || v.trim().length == 0) {
         return;
       }
 
@@ -178,17 +178,24 @@ export class AppComponent {
       var name = piece.substring(0, endOfName);
       var id = this.map[name];
       var cols = piece.substr(endOfName).split(' ');
-      var level = cols[1].replace(/\*/g, '');
-      var power = cols[3].replace(/\*|\.|k/g, '') + "00";
+      var level = cols[1].replace(/\*/g, '').trim();
+      if (level == '0') {
+        level = '';
+      }
+      var power = cols[3].replace(/\*|\./g, '');
+      power = power.replace('k', '00')
       var ys = cols[5].substring(0, cols[5].indexOf(':'));
       var rs = cols[6].replace(/R|S/g, '');
-      var gearTier = cols[7].replace(/G/, '');
-      //alert(piece);
+      var gearTier = '';
 
-      var indexOfDot = gearTier.indexOf('.');
-      if(indexOfDot > 0) {
-        gearTier = gearTier.substring(0, indexOfDot);
+      if (cols[7].startsWith('G')) {
+        gearTier = cols[7].replace(/G/, '');
+        var indexOfDot = gearTier.indexOf('.');
+        if(indexOfDot > 0) {
+          gearTier = gearTier.substring(0, indexOfDot);
+        }
       }
+
 
       this.data.push(id + ',' + name + ',' +power+ ',' +level+ ',' +gearTier+ ',' +ys+ ',' + rs);
       this.last = name;
