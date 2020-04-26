@@ -188,7 +188,7 @@ export class AppComponent {
       var rs = cols[6].replace(/R|S/g, '');
       var gearTier = '';
 
-      if (cols[7].startsWith('G')) {
+      if (cols.length > 7 && cols[7].startsWith('G')) {
         gearTier = cols[7].replace(/G/, '');
         var indexOfDot = gearTier.indexOf('.');
         if(indexOfDot > 0) {
