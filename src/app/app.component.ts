@@ -153,6 +153,7 @@ export class AppComponent {
 
   clear() {
     this.data = ['id,name,power,level,gearTier,stars,redStars'];
+    this.last = '';
   }
 
   downloadFile() {
@@ -162,9 +163,9 @@ export class AppComponent {
   }
 
 
-  parse(val:string) {
+  parse(text:HTMLTextAreaElement) {
 
-    var rows = val.split('\n');
+    var rows = text.value.split('\n');
     this.map;
     rows.forEach(v => {
       let from = v.indexOf('\'s ');
@@ -187,6 +188,7 @@ export class AppComponent {
 
       this.data.push(id + ',' + name + ',' +power+ ',' +level+ ',' +gearTier+ ',' +ys+ ',' + rs);
       this.last = name;
+      text.value = '';
 
     });
   }
