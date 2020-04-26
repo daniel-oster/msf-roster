@@ -121,8 +121,16 @@
               "devServerTarget": "msf-roster:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
-    }},
-  "defaultProject": "msf-roster"
+    }
+  },
+  "defaultProject": "msf-roster",
+  "cli": {
+    "analytics": "77514cd4-e2cb-47e0-b854-985e8ff8039b"
+  }
 }
