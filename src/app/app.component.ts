@@ -173,8 +173,7 @@ export class AppComponent {
         return;
       }
 
-      let from = v.indexOf('\'s ');
-      var piece = v.substr(from + 3)
+      var piece = v;
       let endOfName = piece.indexOf(':');
       var name = piece.substring(0, endOfName);
       var id = this.map[name];
