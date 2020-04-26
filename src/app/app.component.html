@@ -6,8 +6,8 @@
 <h2>paste here</h2>
 <textarea #txt rows="7" style="width: 100%"></textarea>
 <button #a (click)="parse(txt)">Add</button>
-<button #c (click)="clear()">Clear</button>
-<button #d (click)="downloadFile()">Download file</button>
+<button #c (click)="clear(txt)">Clear</button>
+<button #d (click)="downloadFile(txt)">Download file</button>
 
 {{last}}
 

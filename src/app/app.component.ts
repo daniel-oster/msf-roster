@@ -151,15 +151,16 @@ export class AppComponent {
 
   }
 
-  clear() {
+  clear(text:HTMLTextAreaElement) {
     this.data = ['id,name,power,level,gearTier,stars,redStars'];
     this.last = '';
+    text.value = '';
   }
 
-  downloadFile() {
+  downloadFile(text:HTMLTextAreaElement) {
     var blob = new Blob([this.data.join('\n')], {type: "text/csv;charset=utf-8"});
     saveAs(blob, "roster.csv");
-    this.clear();
+    this.clear(text);
   }
 
 
@@ -168,6 +169,10 @@ export class AppComponent {
     var rows = text.value.split('\n');
     this.map;
     rows.forEach(v => {
+      if (v.startsWith('<')) {
+        return;
+      }
+
       let from = v.indexOf('\'s ');
       var piece = v.substr(from + 3)
       let endOfName = piece.indexOf(':');
